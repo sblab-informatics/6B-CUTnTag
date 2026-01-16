@@ -1,6 +1,19 @@
 # dss_like_from_wide_with_scatter_white_bed_raster_jitter.R
-# Usage:
-#   Rscript Supplementary_Figure_11.R input.tsv output.tsv scatter.pdf peaks.bed
+# Usage (generic prefix mode):
+#   Rscript Supplementary_Figure_11.R <PREFIX>
+#
+# This will expand to:
+#   infile   = <PREFIX>_input.txt
+#   outfile  = <PREFIX>.out.txt
+#   plotfile = <PREFIX>.scatterplot.pdf
+#   bedfile  = <PREFIX>_0.05.bed
+#
+# Optional: override just the suffixes/extensions (still using <PREFIX>):
+#   Rscript Supplementary_Figure_11.R <PREFIX> [INPUT_SUFFIX] [OUT_SUFFIX] [PLOT_SUFFIX] [BED_SUFFIX]
+#
+# Example:
+#   Rscript Supplementary_Figure_11.R H3K4Me3_hmC
+#   # uses H3K4Me3_hmC_input.txt, H3K4Me3_hmC.out.txt, H3K4Me3_hmC.scatterplot.pdf, H3K4Me3_hmC_0.05.bed
 #
 # Description:
 #   - Reads a wide-format table with 5 replicate blocks (each block: Chr Start End Meth_Prop #mC #C)
@@ -19,15 +32,39 @@ suppressWarnings(suppressMessages({
 }))
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 4) 
-{
-  stop("Usage: Rscript Supplementary_Figure_11.R input.tsv output.tsv scatter.pdf peaks.bed")
+
+# ---- CLI parsing ----
+# Preferred (generic) mode: a single prefix, with optional suffix overrides.
+if (length(args) < 1) {
+  stop(paste(
+    "Usage:",
+    "  Rscript Supplementary_Figure_11.R <PREFIX> [INPUT_SUFFIX] [OUT_SUFFIX] [PLOT_SUFFIX] [BED_SUFFIX]",
+    "\nExample:",
+    "  Rscript Supplementary_Figure_11.R H3K4Me3_hmC",
+    sep = "\n"
+  ))
 }
 
-infile   <- args[1]
-outfile  <- args[2]
-plotfile <- args[3]
-bedfile  <- args[4]
+prefix <- args[1]
+
+# Histone mark is assumed to be the part of the prefix before the first underscore,
+# e.g. "H3K4Me3_hmC" -> "H3K4Me3". If there is no underscore, we use the whole prefix.
+histone_mark <- sub("_.*$", "", prefix)
+in_suf   <- if (length(args) >= 2) args[2] else "_input.txt"
+out_suf  <- if (length(args) >= 3) args[3] else ".out.txt"
+plot_suf <- if (length(args) >= 4) args[4] else ".scatterplot.pdf"
+bed_suf  <- if (length(args) >= 5) args[5] else "_0.05.bed"
+
+infile   <- paste0(prefix, in_suf)
+outfile  <- paste0(prefix, out_suf)
+plotfile <- paste0(prefix, plot_suf)
+bedfile  <- paste0(prefix, bed_suf)
+
+cat(sprintf("Prefix: %s\n", prefix))
+cat(sprintf("Input:  %s\n", infile))
+cat(sprintf("Output: %s\n", outfile))
+cat(sprintf("Plot:   %s\n", plotfile))
+cat(sprintf("BED:    %s\n", bedfile))
 
 dt <- fread(infile)
 
@@ -195,9 +232,9 @@ p <- ggplot(out, aes(x = mu1, y = mu2)) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray40") +
   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
   labs(
-    title = expression("Scatter of H3K4me3 5mC  Vs DUET 5mC"),
+    title = sprintf("Scatter of %s 5mC vs DUET 5mC", histone_mark),
     x = "DUET 5mC",
-    y = "H3K4Me3 5mC"
+    y = sprintf("%s 5mC", histone_mark)
   ) +
   theme_bw(base_size = 13) +
   theme(
