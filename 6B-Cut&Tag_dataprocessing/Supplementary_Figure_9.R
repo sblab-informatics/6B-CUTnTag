@@ -1,4 +1,4 @@
-
+#BED files are available at 6B-Cut&Tag_dataprocessing/Supplementary Figure 9/
 dat<- read.table("H3K27ac_CnT_shared_cpg_mc.bed", fill=TRUE, header=T)
 df = data.frame(dat)
 head(df)
