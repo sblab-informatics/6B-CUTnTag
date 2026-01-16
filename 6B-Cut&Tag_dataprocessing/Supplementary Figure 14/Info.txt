@@ -1,1 +1,16 @@
+Poised CpGs
+H3K4Me1_enrichment.20x.hmc.poised.txt
+H3K4Me1_enrichment.20x.mc.poised.txt
+H3K27Me3_enrichment.20x.hmc.poised.txt
+H3K27Me3_enrichment.20x.mc.poised.txt
 
+
+Active CpGs
+H3K27ac_enrichment.20x.hmc.active.txt
+H3K27ac_enrichment.20x.mc.active.txt
+H3K4Me1_enrichment.20x.hmc.active.txt
+H3K4Me1_enrichment.20x.mc.active.txt
+
+Primed CpGs
+H3K4Me1_enrichment.20x.mc.primed.txt
+H3K4Me1_enrichment.20x.hmc.primed.txt
