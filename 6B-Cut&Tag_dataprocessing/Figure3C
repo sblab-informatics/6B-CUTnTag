@@ -1,1 +1,3 @@
+Enhancer files available at : https://ars.els-cdn.com/content/image/1-s2.0-S1934590917300371-mmc2.xls
+Use GSM9349170_6B_CnT_H3K27acrep2_Resolved_reads.cpm_bs10.bw, GSM9349162_6B_CnT_H3K4Me1rep2_Resolved_reads.cpm_bs10.bw and GSM9349168_6B_CnT_H3K27Me3rep2_Resolved_reads.cpm_bs10.bw for plotting the three metagenes using deepTools computeMatrix and plotProfile function
 
