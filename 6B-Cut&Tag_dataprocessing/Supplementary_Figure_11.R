@@ -1,6 +1,6 @@
 # dss_like_from_wide_with_scatter_white_bed_raster_jitter.R
 # Usage:
-#   Rscript Supp.Figure_8.R input.tsv output.tsv scatter.pdf peaks.bed
+#   Rscript Supplementary_Figure_11.R input.tsv output.tsv scatter.pdf peaks.bed
 #
 # Description:
 #   - Reads a wide-format table with 5 replicate blocks (each block: Chr Start End Meth_Prop #mC #C)
@@ -21,7 +21,7 @@ suppressWarnings(suppressMessages({
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 4) 
 {
-  stop("Usage: Rscript Supp.Figure_SW.R input.tsv output.tsv scatter.pdf peaks.bed")
+  stop("Usage: Rscript Supplementary_Figure_11.R input.tsv output.tsv scatter.pdf peaks.bed")
 }
 
 infile   <- args[1]
