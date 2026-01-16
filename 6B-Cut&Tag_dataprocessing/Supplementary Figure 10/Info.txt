@@ -1,1 +1,2 @@
-
+Input files are stored in 
+6B-Cut&Tag_dataprocessing/DMCfiles
