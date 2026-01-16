@@ -1,1 +1,8 @@
+The script is run like this:
+python Supplementary_Figure_13.py <hmC.10x.allwindow.bed>
 
+Optional arguments:
+--outdir plots        # output directory (default: plots)
+--logy                # use log10 scale on Y axis
+--showfliers          # show outliers in boxplots
+--dpi 300             # image resolution
