@@ -31,3 +31,5 @@ python predict.py --input [your data path] --cpt [select a model from checkpoint
 ```
 - ```checkpoints/CnT6B_model_at_epoch22.cpt```: model trianed on the 6B-CUT&Tag data.
 - ```checkpoints/WG6B_model_at_epoch20.cpt```: model trained on the whole-genome data.
+
+The data was preprocessed as described in the jupyter notebook ```data_preprocessing.ipynb```. Raw counts normalized by the corresponding total counts were used as the input features.
